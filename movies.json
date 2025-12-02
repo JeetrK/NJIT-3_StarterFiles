@@ -68,5 +68,19 @@
             "likes": 812,
             "dislikes": 101,
             "posterindex": 0
+      },
+      {
+            "title": "Gummo",
+            "iscore": 6.6,
+            "rating": "R",
+            "runtime": 89,
+            "released": [1997, 10, 17],
+            "country": "USA",
+            "posters": ["img/gummo.jpg", "img/gummo2.jpg"],
+            "imdb": "https://www.imdb.com/title/tt0119237/",
+            "website": "https://www.uphe.com/schindlers-list",
+            "likes": 812,
+            "dislikes": 101,
+            "posterindex": 0
       }
 ]
