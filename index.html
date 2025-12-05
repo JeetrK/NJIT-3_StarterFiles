@@ -37,6 +37,7 @@
 			<div class="row">
 
 				<div class="col-md-6">
+					<div class="col-md-6" v-for="movie in movies"></div>
 					<div class="thumbnail">
 
 						<img class="poster img-fluid" />
@@ -61,6 +62,7 @@
 		<div class="footer">
 			<div class="container">
 				<a :href="github" target="_blank" id="github" class="btn btn-lg btn-warning">
+					<!--Frogot to commit after steps 3 and 4-->
 					<i class="bi bi-github me-2"></i>{{owner}}
 				</a>
 			</div>
