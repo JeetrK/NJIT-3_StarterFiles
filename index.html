@@ -36,41 +36,48 @@
 
 			<div class="row">
 
-				<div class="col-md-6">
-					<div class="col-md-6" v-for="movie in movies"></div>
-					<div class="thumbnail">
+				<div class="row" v-for="(movie,index)in movies">
+					<div class="col-md-6" v-for="(movie, index) in movies">
+						<div class="thumbnail">
 
-						<img class="poster img-fluid" />
-						<div class="imageInfo">{{posterindex}}</div>
+							<img @click="posterClick(index)" class="poster img-fluid"
+								:src="movie.posters[movie.posterindex]" />
+							<div class="imageInfo">{{movie.posterindex}}</div>
+							</p>
+							<p class="title">{{movie.title}} ({{movie.country}})</p>
+							<p class="score"> <i class="bi bi-star" aria-hidden="true"></i> {{iscore}} </p>
+							<p class="runtime">Runtime: {{timeText(movie.runtime)}}</p>
+							<p class="released">
+								Released: {{makeTextDate(movie.released)}} | Rated:
+								{{movie.rating}}
+							</p>
+							<p class="websites">Websites: <a> imdb </a> | <a>website</a></p>
 
-						<p class="title">{{title}} ({{country}})</p>
-						<p class="score"> <i class="bi bi-star" aria-hidden="true"></i> {{iscore}} </p>
-						<p class="runtime">Runtime: {{runtime}}</p>
-						<p class="released">Released: {{released}} | Rated: {{rating}}</p>
-						<p class="websites">Websites: <a> imdb </a> | <a>website</a></p>
-
-						<div class="social">
-							<p class="likes"><i class="bi bi-hand-thumbs-up" aria-hidden="true"></i> {{likes}}</p>
-							<p class="dislikes"><i class="bi bi-hand-thumbs-down"></i> {{dislikes}}</p>
+							<div class="social">
+								<p class="likes likecolor" @click="like(index)">
+									<i class="bi bi-hand-thumbs-up" aria-hidden="true"></i> {{movie.likes}}
+								</p>
+								<p class="dislikes dislikecolor" @click="dislike(index)">
+									<i class="bi bi-hand-thumbs-down"></i> {{movie.dislikes}}
+							</div>
 						</div>
 					</div>
+
 				</div>
+			</div>
 
+			<div class="footer">
+				<div class="container">
+					<a :href="github" target="_blank" id="github" class="btn btn-lg btn-warning">
+						<!--Frogot to commit after steps 3 and 4-->
+						<i class="bi bi-github me-2"></i>{{owner}}
+					</a>
+				</div>
 			</div>
 		</div>
 
-		<div class="footer">
-			<div class="container">
-				<a :href="github" target="_blank" id="github" class="btn btn-lg btn-warning">
-					<!--Frogot to commit after steps 3 and 4-->
-					<i class="bi bi-github me-2"></i>{{owner}}
-				</a>
-			</div>
-		</div>
-	</div>
-
-	<!-- This load the Vue.js code -->
-	<script type="text/javascript" src="site.js"></script>
+		<!-- This load the Vue.js code -->
+		<script type="text/javascript" src="site.js"></script>
 
 
 </body>
