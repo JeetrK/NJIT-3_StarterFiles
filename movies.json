@@ -56,20 +56,6 @@
             "posterindex": 0
       },
       {
-            "title": "Schindler's List",
-            "iscore": 8.9,
-            "rating": "R",
-            "runtime": 195,
-            "released": [1993, 11, 30],
-            "country": "USA",
-            "posters": ["img/schindlerslist.jpg"],
-            "imdb": "http://www.imdb.com/title/tt0108052",
-            "website": "https://www.uphe.com/schindlers-list",
-            "likes": 812,
-            "dislikes": 101,
-            "posterindex": 0
-      },
-      {
             "title": "Gummo",
             "iscore": 6.6,
             "rating": "R",
@@ -105,6 +91,20 @@
             "released": [1999, 2, 19],
             "country": "USA",
             "posters": ["/img/office.png"],
+            "imdb": "https://www.imdb.com/title/tt0151804/",
+            "website": "https://www.uphe.com/schindlers-list",
+            "likes": 812,
+            "dislikes": 101,
+            "posterindex": 0
+      },
+      {
+            "title": "Weapons",
+            "iscore": 7.5,
+            "rating": "R",
+            "runtime": 128,
+            "released": [2025, 8, 8],
+            "country": "USA",
+            "posters": ["/img/weapons.jpg", "/img/weapons2.png"],
             "imdb": "https://www.imdb.com/title/tt0151804/",
             "website": "https://www.uphe.com/schindlers-list",
             "likes": 812,
