@@ -5,7 +5,7 @@ body {
     padding: 0;
     width: 100%;
     overflow: auto;
-    background-image: url(img/geometry.jpg);
+    background-color: #eef3f8;
 }
 
 /* This stylizes the header area */
@@ -70,10 +70,12 @@ body {
     font-size: 18px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     font-weight: 200;
-    height: 80px;
-    line-height: 80px;
+    /* circular badge */
+    width: 64px;
+    height: 64px;
+    line-height: 64px;
     text-align: center;
-    width: 80px;
+    border-radius: 50%;
     position: absolute;
     top: 50px;
     right: 25px;
@@ -104,7 +106,18 @@ body {
     text-align: center;
     font-weight: 200;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: 500ms;
+    transition: background-color 200ms ease, transform 160ms ease, box-shadow 200ms ease;
+}
+
+/* Hover and active pseudo-classes for smoother interaction */
+.likes:hover,
+.dislikes:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+.likes:active,
+.dislikes:active {
+    transform: translateY(-1px) scale(0.98);
 }
 
 /* This makes sure your Github Button is centered */
