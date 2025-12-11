@@ -12,6 +12,10 @@
 		integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 	<link rel="stylesheet" type='text/css' href="style.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Cal+Sans&family=Cinzel+Decorative:wght@400;700;900&family=Edu+AU+VIC+WA+NT+Arrows:wght@400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Protest+Revolution&display=swap" rel="stylesheet">
 
 	<!-- DO NOT CHANGE ANYTHING ABOVE THIS LINE-->
 
@@ -22,11 +26,11 @@
 </head>
 
 <body>
-	<div id="vue_app" class="container">
+	<div id="vue_app" class="container-fluid">
 
 		<div class="header">
 
-			<div class="container">
+			<div class="container-fluid">
 				<h1 id="app_title">{{title}}</h1>
 			</div>
 
@@ -35,39 +39,41 @@
 		<div class="main">
 
 			<div class="row">
+				<div class="col-12">
+					<div class="carousel" v-if="movies.length">
+						<button class="carousel-control prev btn btn-light" @click="prevMovie()" aria-label="Previous">
+							<i class="bi bi-chevron-left"></i>
+						</button>
 
-				<div class="row" v-for="(movie,index)in movies">
-					<div class="col-md-6" v-for="(movie, index) in movies">
 						<div class="thumbnail">
-
-							<img @click="posterClick(index)" class="poster img-fluid"
-								:src="movie.posters[movie.posterindex]" />
-							<div class="imageInfo">{{movie.posterindex}} of {{movie.posters.length}}</div>
-							</p>
-							<p class="title">{{movie.title}} ({{movie.country}})</p>
-							<p class="score"> <i class="bi bi-star" aria-hidden="true"></i> {{iscore}} </p>
-							<p class="runtime">Runtime: {{timeText(movie.runtime)}}</p>
-							<p class="released">
-								Released: {{makeTextDate(movie.released)}} | Rated:
-								{{movie.rating}}
-							</p>
-							<p class="websites">Websites: <a> imdb </a> | <a>website</a></p>
+							<img @click="posterClick()" class="poster img-fluid" :src="movies[currentIndex].posters[movies[currentIndex].posterindex]" />
+							<div class="imageInfo">{{movies[currentIndex].posterindex}} of {{movies[currentIndex].posters.length}}</div>
+							<p class="title">{{movies[currentIndex].title}} ({{movies[currentIndex].country}})</p>
+							<p class="score"> <i class="bi bi-star" aria-hidden="true"></i> {{movies[currentIndex].iscore}} </p>
+							<p class="runtime">Runtime: {{timeText(movies[currentIndex].runtime)}}</p>
+							<p class="released">Released: {{makeTextDate(movies[currentIndex].released)}} | Rated: {{movies[currentIndex].rating}}</p>
+							<p class="websites">Websites: <a :href="movies[currentIndex].imdb" target="_blank">imdb</a> | <a :href="movies[currentIndex].website" target="_blank">website</a></p>
 
 							<div class="social">
-								<p class="likes likecolor" @click="like(index)">
-									<i class="bi bi-hand-thumbs-up" aria-hidden="true"></i> {{movie.likes}}
+								<p class="likes likecolor" @click="like()">
+									<i class="bi bi-hand-thumbs-up" aria-hidden="true"></i> {{movies[currentIndex].likes}}
 								</p>
-								<p class="dislikes dislikecolor" @click="dislike(index)">
-									<i class="bi bi-hand-thumbs-down"></i> {{movie.dislikes}}
+								<p class="dislikes dislikecolor" @click="dislike()">
+									<i class="bi bi-hand-thumbs-down" aria-hidden="true"></i> {{movies[currentIndex].dislikes}}
+								</p>
 							</div>
 						</div>
-					</div>
 
+						<button class="carousel-control next btn btn-light" @click="nextMovie()" aria-label="Next">
+							<i class="bi bi-chevron-right"></i>
+						</button>
+					</div>
+					<div v-else class="text-center">Loading movies...</div>
 				</div>
 			</div>
 
 			<div class="footer">
-				<div class="container">
+				<div class="container-fluid">
 					<a :href="github" target="_blank" id="github" class="btn btn-lg btn-warning">
 						<!--Frogot to commit after steps 3 and 4-->
 						<i class="bi bi-github me-2"></i>{{owner}}

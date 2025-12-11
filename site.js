@@ -33,11 +33,17 @@ const vue_app = Vue.createApp({
     return {
                   // This holds your movies.json data.
                   movies: [],
+                  currentIndex: 0,
                   title: "",
                   owner: "Harrison Klein",
                   github: "https://github.com/JeetrK/NJIT-3_StarterFiles",
                   /* ADD ADDITIONAL VARIABLES FOR STEP 3 HERE */
 
+            }
+      },
+      computed: {
+            currentMovie() {
+                  return this.movies[this.currentIndex]
             }
       },
       methods: {
@@ -50,16 +56,27 @@ const vue_app = Vue.createApp({
 
             },
             like(index) {
+                  if (index === undefined) index = this.currentIndex
                   this.movies[index].likes++
             },
             dislike(index) {
+                  if (index === undefined) index = this.currentIndex
                   this.movies[index].dislikes++
 
             },
             posterClick(index) {
+                  if (index === undefined) index = this.currentIndex
                   let movie = this.movies[index];
                   movie.posterindex = (movie.posterindex + 1) % movie.posters.length;
                   
+            },
+            prevMovie() {
+                  if (!this.movies.length) return
+                  this.currentIndex = (this.currentIndex - 1 + this.movies.length) % this.movies.length
+            },
+            nextMovie() {
+                  if (!this.movies.length) return
+                  this.currentIndex = (this.currentIndex + 1) % this.movies.length
             },
             timeText(minutes) {
                   let hrs = Math.floor(minutes / 60);

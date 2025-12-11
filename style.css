@@ -4,23 +4,66 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
+    height: 100%;
     overflow: auto;
-    background-color: #eef3f8;
+    color: #eee;
+    font-family: 'Playfair Display', serif;
+    background: radial-gradient(1200px 500px at 10% 10%, rgba(255,255,255,0.02), transparent),
+                linear-gradient(180deg, #0a0a0a 0%, #111 60%);
+}
+
+html {
+    height: 100%;
+}
+
+/* Make the app fill the full viewport and let .main expand */
+#vue_app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+}
+
+.main {
+    flex: 1 0 auto;
 }
 
 /* This stylizes the header area */
-.header {
-    padding: 15px;
+ .header {
+    padding: 18px 10px;
+    background: linear-gradient(90deg, rgba(18,18,18,0.95), rgba(40,10,10,0.9));
+    box-shadow: inset 0 -6px 0 rgba(0,0,0,0.6);
 }
 .header h1 {
     display: inline-block;
-    color: white;
+}
+
+#app_title {
+    font-family: 'Playfair Display', serif;
+    color: #ffd54a;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    text-align: center;
+    margin: 0 auto;
+    text-shadow: 0 3px 8px rgba(0,0,0,0.7);
+}
+
+.now-showing {
+    display: inline-block;
+    background: linear-gradient(180deg,#b1121b,#7a0b0b);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 3px;
+    font-weight: 600;
+    margin-left: 12px;
+    vertical-align: middle;
+    font-family: 'Playfair Display', serif;
 }
 
 /* This stylizes the main page area */
-.main {
-    background-color: #f2f2f2;
-    padding: 40px 0;
+ .main {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent 40%), rgba(0,0,0,0.2);
+    padding: 48px 0 80px;
 }
 
 /* This stylizes the poster area and poster images */
@@ -30,13 +73,48 @@ body {
     padding: 20px;
     margin: 20px;
     border-radius: 0;
-    background-color:#dddddd;
+    background-color: #0e0e0e;
+    border-radius: 6px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.7), 0 2px 6px rgba(0,0,0,0.6);
+    border: 6px solid #000;
 }
 .thumbnail img {
-    margin-top: 10px;
-    margin-bottom: 30px;
+    /* Fallback: make images tidy and centered */
+    display: block;
+    margin: 10px auto 30px;
     padding: 5px;
     border: 2px dashed black;
+}
+
+.thumbnail::before,
+.thumbnail::after {
+    /* film sprocket holes effect */
+    content: '';
+    position: absolute;
+    top: 22px;
+    bottom: 22px;
+    width: 22px;
+    background-image: radial-gradient(circle at 11px 12px, rgba(255,255,255,0.08) 6px, transparent 7px);
+    background-size: 22px 44px;
+    pointer-events: none;
+}
+.thumbnail::before { left: -38px; }
+.thumbnail::after { right: -38px; transform: scaleX(-1); }
+
+/* Ensure all poster images render at the same dimensions while remaining responsive */
+.thumbnail img.poster {
+    width: 100%;
+    max-width: 320px; /* ideal display width */
+    height: 480px; /* fixed display height to create uniform cards */
+    object-fit: cover; /* crop while preserving aspect ratio */
+    display: block;
+    margin: 10px auto 30px;
+}
+
+.thumbnail img.poster {
+    border-radius: 4px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.7);
+    border: 2px solid rgba(255,255,255,0.03);
 }
 
 /* This stylizes your "Poster X of Y" text */
@@ -51,34 +129,36 @@ body {
 /* This stylizes your Title and Rating Text */
 .title,
 .released {
-    color: #444;
+    color: #ffdeda;
     margin: 0;
-    font-size: 18px;
-    font-weight: 800;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
 }
 .released,
 .rated {
-    color: #5d5d5d;
+    color: #d6d6d6;
     font-size: 14px;
-    font-weight: 200;
+    font-weight: 300;
 }
 
 /* This shapes your IMDB score area */
 .score {
-    background-color: #39D1B4;
-    color: #fff;
+    background: linear-gradient(180deg,#ffd54a,#ffb300);
+    color: #111;
     font-size: 18px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    font-weight: 200;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+    font-weight: 700;
     /* circular badge */
-    width: 64px;
-    height: 64px;
-    line-height: 64px;
+    width: 66px;
+    height: 66px;
+    line-height: 66px;
     text-align: center;
     border-radius: 50%;
     position: absolute;
-    top: 50px;
-    right: 25px;
+    top: 28px;
+    right: 28px;
+    border: 3px solid rgba(0,0,0,0.35);
 }
 
 /* This contains your like and dislike buttons */
@@ -105,8 +185,12 @@ body {
     margin: 0 -30px 0 40px;
     text-align: center;
     font-weight: 200;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: background-color 200ms ease, transform 160ms ease, box-shadow 200ms ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    transition: background-color 200ms ease, transform 160ms ease, box-shadow 200ms ease, color 160ms ease;
+    background: rgba(255,255,255,0.03);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.04);
+    font-family: 'Montserrat', sans-serif;
 }
 
 /* Hover and active pseudo-classes for smoother interaction */
@@ -118,6 +202,49 @@ body {
 .likes:active,
 .dislikes:active {
     transform: translateY(-1px) scale(0.98);
+}
+
+/* Carousel layout and controls */
+.carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+.carousel .thumbnail {
+    max-width: 720px;
+    width: 100%;
+    position: relative;
+}
+.carousel-control {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    transition: transform 140ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+.carousel-control:hover {
+    transform: translateY(-3px);
+}
+.carousel-control:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Footer / credits styled like a cinema placard */
+.footer {
+    text-align: center;
+    margin: 80px 0 110px;
+}
+.footer #github {
+    background: linear-gradient(180deg,#f6c85f,#e29f2e);
+    color: #111;
+    border: none;
+    padding: 10px 18px;
+    font-weight: 700;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.5);
 }
 
 /* This makes sure your Github Button is centered */
